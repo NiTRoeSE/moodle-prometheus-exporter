@@ -40,7 +40,7 @@ def get_metrics(moodle_db):
     DB_QUERY_ACTIVE_USER = "SELECT COUNT(*) FROM mdl_user WHERE deleted=0 AND lastaccess > {} AND lastaccess < {};".format(timestamp_start,timestamp_now)
     DB_QUERY_ONLINE_USER = "SELECT count(*) FROM mdl_user where timestampdiff(MINUTE, from_unixtime(lastaccess), now()) < 5;"
     DB_QUERY_ALL_USERS = "SELECT COUNT(*) FROM mdl_user WHERE deleted=0;"
-    DB_QUERY_SIZE = "SELECT table_schema, SUM(data_length + index_length) / 1024 / 1024 AS 'DB Size in MB' FROM information_schema.tables WHERE table_schema = 'mz_moodle_db' GROUP BY table_schema;"
+    DB_QUERY_SIZE = "SELECT table_schema, SUM(data_length + index_length) / 1024 / 1024 AS 'DB Size in MB' FROM information_schema.tables WHERE table_schema = '{}' GROUP BY table_schema;".format(database)
 
     #create cursor
     moodle_cursor = moodle_db.cursor()
